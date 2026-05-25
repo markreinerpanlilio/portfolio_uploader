@@ -1,71 +1,145 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Upload</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-      <input
-        type="text"
-        id="gCustomDesignType"
-        class="hidden"
-        placeholder="Enter Design Type"
-      />
+<div id="app">
 
-      <select id="gTools">
-        <option value="">Select Tool</option>
-        <option value="Canva">Canva</option>
-        <option value="Photoshop">Photoshop</option>
-      </select>
-
-      <input type="text" id="gLink" placeholder="Project Link / Drive Link" />
-
-      <label>Main Image</label>
-      <input type="file" id="gThumbnail" accept="image/*" required />
-
-      <button type="submit">Upload Graphic Design</button>
-
-    </form>
-
-
-    <!-- UI UX FORM -->
-
-    <form id="uiuxForm" class="hidden">
-
-      <h2>UI/UX Upload</h2>
-
-      <input type="text" id="uTitle" placeholder="Project Title" required />
-
-      <textarea id="uDescription" placeholder="Description"></textarea>
-
-      <select id="uPlatform">
-        <option value="">Select Platform</option>
-        <option value="Mobile">Mobile</option>
-        <option value="Web">Web</option>
-        <option value="Desktop">Desktop</option>
-      </select>
-
-      <select id="uTools">
-        <option value="">Select Tool</option>
-        <option value="Figma">Figma</option>
-        <option value="Canva">Canva</option>
-      </select>
-
-      <input
-        type="text"
-        id="uFigmaLink"
-        placeholder="Figma / Prototype Link"
-      />
-
-      <label>Cover Image</label>
-      <input type="file" id="uCover" accept="image/*" required />
-
-      <label>Demo Video (Optional)</label>
-      <input type="file" id="uVideo" accept="video/*" />
-
-      <button type="submit">Upload UI/UX Project</button>
-
-    </form>
-
+  <div class="landing" id="landing">
+    <div class="brand">
+      <div class="brand-icon">&#9707;</div>
+      <h1>Portfolio Upload</h1>
+      <p>Add your creative work to the portfolio</p>
+    </div>
+    <p class="prompt">Select a category to get started</p>
+    <div class="cats">
+      <div class="cat" tabindex="0" onclick="goTo('gfx')" onkeydown="if(event.key==='Enter')goTo('gfx')">
+        <div class="cat-icon">&#9670;</div>
+        <h2>Graphic Design</h2>
+        <p>Logos, branding, print, social media and more</p>
+        <div class="arr">&#8594;</div>
+      </div>
+      <div class="cat" tabindex="0" onclick="goTo('uiux')" onkeydown="if(event.key==='Enter')goTo('uiux')">
+        <div class="cat-icon">&#9707;</div>
+        <h2>UI / UX</h2>
+        <p>Mobile, web, and desktop interface projects</p>
+        <div class="arr">&#8594;</div>
+      </div>
+    </div>
   </div>
 
-  <script src="supabase.js"></script>
-  <script src="script.js"></script>
+  <div class="page" id="gfx">
+    <div class="topbar">
+      <button onclick="goTo('landing')">&#8592; Back</button>
+      <span>Graphic Design Upload</span>
+    </div>
+    <div class="body">
+      <p class="sec">Project Details</p>
+      <div class="field"><label>Project Title</label><input id="gTitle" placeholder="Project Title" required /></div>
+      <div class="field"><label>Description</label><textarea id="gDescription" placeholder="Description"></textarea></div>
+      <div class="row">
+        <div class="field">
+          <label>Design Type</label>
+          <select id="gDesignType" onchange="toggleCustom()">
+            <option value="">Select Design Type</option>
+            <option>Logo</option><option>Branding</option><option>Print</option>
+            <option>Social Media</option><option>Others</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Tools</label>
+          <select id="gTools">
+            <option value="">Select Tool</option>
+            <option>Canva</option><option>Photoshop</option>
+          </select>
+        </div>
+      </div>
+      <div class="field hidden" id="gCustomWrap"><label>Custom Design Type</label><input id="gCustomDesignType" placeholder="Enter Design Type" /></div>
+      <div class="field"><label>Project Link / Drive Link</label><input id="gLink" placeholder="Project Link / Drive Link" /></div>
+      <p class="sec">Files</p>
+      <div class="field"><label>Main Image</label>
+        <div class="upload" id="gThumbBox">
+          <p class="ulbl">Click to upload</p><p class="usub">JPG, PNG, WEBP</p>
+          <input type="file" id="gThumbnail" accept="image/*" required onchange="fileChosen('gThumbBox',this)" />
+        </div>
+      </div>
+      <button type="button" class="btn" id="gUploadBtn">
+        &#8593; Upload
+      </button>
+    </div>
+  </div>
 
+  <div class="page" id="uiux">
+    <div class="topbar">
+      <button onclick="goTo('landing')">&#8592; Back</button>
+      <span>UI / UX Upload</span>
+    </div>
+    <div class="body">
+      <p class="sec">Project Details</p>
+      <div class="field"><label>Project Title</label><input id="uTitle" placeholder="Project Title" required /></div>
+      <div class="field"><label>Description</label><textarea id="uDescription" placeholder="Description"></textarea></div>
+      <div class="row">
+        <div class="field">
+          <label>Platform</label>
+          <select id="uPlatform">
+            <option value="">Select Platform</option>
+            <option>Mobile</option><option>Web</option><option>Desktop</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Tools</label>
+          <select id="uTools">
+            <option value="">Select Tool</option>
+            <option>Figma</option><option>Canva</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label>Figma / Prototype Link</label><input id="uFigmaLink" placeholder="Figma / Prototype Link" /></div>
+      <p class="sec">Files</p>
+      <div class="field"><label>Cover Image</label>
+        <div class="upload" id="uCoverBox">
+          <p class="ulbl">Click to upload</p><p class="usub">JPG, PNG, WEBP</p>
+          <input type="file" id="uCover" accept="image/*" required onchange="fileChosen('uCoverBox',this)" />
+        </div>
+      </div>
+      <div class="field"><label>Demo Video <span class="opt">Optional</span></label>
+        <div class="upload" id="uVideoBox">
+          <p class="ulbl">Click to upload</p><p class="usub">MP4, MOV</p>
+          <input type="file" id="uVideo" accept="video/*" onchange="fileChosen('uVideoBox',this)" />
+        </div>
+      </div>
+      <button type="button" class="btn" id="uUploadBtn">
+        &#8593; Upload
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="script.js"></script>
+<script>
+  function goTo(id) {
+    ['landing','gfx','uiux'].forEach(p => {
+      const el = document.getElementById(p);
+      el.style.display = el.id === id ? (id === 'landing' ? 'flex' : 'block') : 'none';
+    });
+  }
+  function toggleCustom() {
+    document.getElementById('gCustomWrap').classList.toggle('hidden', document.getElementById('gDesignType').value !== 'Others');
+  }
+  function fileChosen(id, input) {
+    if (!input.files[0]) return;
+    const box = document.getElementById(id);
+    box.querySelector('.ulbl').textContent = input.files[0].name;
+    box.style.cssText += 'border-color:#2563eb;background:#eff6ff';
+  }
+</script>
 </body>
 </html>
