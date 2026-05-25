@@ -1,1 +1,71 @@
+<!DOCTYPE html>
 
+      <input
+        type="text"
+        id="gCustomDesignType"
+        class="hidden"
+        placeholder="Enter Design Type"
+      />
+
+      <select id="gTools">
+        <option value="">Select Tool</option>
+        <option value="Canva">Canva</option>
+        <option value="Photoshop">Photoshop</option>
+      </select>
+
+      <input type="text" id="gLink" placeholder="Project Link / Drive Link" />
+
+      <label>Main Image</label>
+      <input type="file" id="gThumbnail" accept="image/*" required />
+
+      <button type="submit">Upload Graphic Design</button>
+
+    </form>
+
+
+    <!-- UI UX FORM -->
+
+    <form id="uiuxForm" class="hidden">
+
+      <h2>UI/UX Upload</h2>
+
+      <input type="text" id="uTitle" placeholder="Project Title" required />
+
+      <textarea id="uDescription" placeholder="Description"></textarea>
+
+      <select id="uPlatform">
+        <option value="">Select Platform</option>
+        <option value="Mobile">Mobile</option>
+        <option value="Web">Web</option>
+        <option value="Desktop">Desktop</option>
+      </select>
+
+      <select id="uTools">
+        <option value="">Select Tool</option>
+        <option value="Figma">Figma</option>
+        <option value="Canva">Canva</option>
+      </select>
+
+      <input
+        type="text"
+        id="uFigmaLink"
+        placeholder="Figma / Prototype Link"
+      />
+
+      <label>Cover Image</label>
+      <input type="file" id="uCover" accept="image/*" required />
+
+      <label>Demo Video (Optional)</label>
+      <input type="file" id="uVideo" accept="video/*" />
+
+      <button type="submit">Upload UI/UX Project</button>
+
+    </form>
+
+  </div>
+
+  <script src="supabase.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
